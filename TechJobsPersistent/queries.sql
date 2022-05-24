@@ -1,4 +1,9 @@
 --Part 1
+SELECT COLUMNS FROM employers;
+SELECT COLUMNS FROM jobs;
+SELECT COLUMNS FROM jobskill;
+SELECT COLUMNS FROM skills;
+
 
 --Part 2
 
