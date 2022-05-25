@@ -33,15 +33,47 @@ namespace TechJobsPersistent.Controllers
         public IActionResult AddJob()
         {
             AddJobViewModel addJobViewModel = new AddJobViewModel();
+            
 
-            ViewBag.Employers = context.Employers.ToList();
-
+            //ViewBag.Employers = context.Employers.ToList();
+            List<Employer> employerList = context.Employers.ToList();
+            List<SelectListItem> selectListItemList = new List<SelectListItem>();
+            foreach (Employer employer in employerList)
+            {
+                SelectListItem selectListItem = new SelectListItem
+                {
+                    Text = employer.Name,
+                    Value = employer.Id.ToString()
+                };
+                selectListItemList.Add(selectListItem);
+            }
+            //ViewBag.Employers = selectListItemList;
+            addJobViewModel.Employers = selectListItemList;
             return View(addJobViewModel);
         }
 
-        public IActionResult ProcessAddJobForm()
+        [HttpPost]
+        public IActionResult ProcessAddJobForm(AddJobViewModel addJobViewModel)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View("AddJob", addJobViewModel); //TODO, SelectItemList does not repopulate on validation error
+            }
+            Employer employerToFind = context.Employers.Find(addJobViewModel.EmployerId);
+            if (employerToFind != null)
+            {
+                Job job = new Job
+                {
+                    Name = addJobViewModel.Name,
+                    EmployerId = (int)addJobViewModel.EmployerId,
+                    Employer = employerToFind,
+                };
+                context.Jobs.Add(job);
+                context.SaveChanges();
+                return Redirect("/");
+            }
+
+            return Redirect("/AddJob");
         }
 
         public IActionResult Detail(int id)

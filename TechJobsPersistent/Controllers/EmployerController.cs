@@ -33,6 +33,7 @@ namespace TechJobsPersistent.Controllers
         [HttpPost]
         public IActionResult ProcessAddEmployerForm(AddEmployerViewModel addEmployerViewModel)
         {
+            
             if (!ModelState.IsValid)
             {
                 return View("Add", addEmployerViewModel);
