@@ -6,6 +6,7 @@ SELECT COLUMNS FROM skills;
 
 
 --Part 2
+SELECT * FROM techjobs.employers WHERE techjobs.employers.Location = "St Louis";
 
 --Part 3
 
