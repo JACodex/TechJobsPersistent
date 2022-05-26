@@ -9,4 +9,5 @@ SELECT COLUMNS FROM skills;
 SELECT * FROM techjobs.employers WHERE techjobs.employers.Location = "St Louis";
 
 --Part 3
+SELECT Name FROM techjobs.skills INNER JOIN jobskills ON jobskills.SkillId = skills.Id WHERE jobskills.JobId IS NOT NULL ORDER BY Name;
 

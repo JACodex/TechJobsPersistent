@@ -24,6 +24,14 @@
         </div>
         <span asp-validation-for="EmployerId" style="color: red"></span>
     </div>
+    <div class="form-group">
+        <label>Choose a skill</label>
+        @foreach(var skill in @Model.Skills)
+        {
+            <label>@skill.Name</label>
+             <input type="checkbox" name="selectedSkills" value="@skill.Id" />
+        }
+    </div>
 
     <input type="submit" value="Add Job" />
 </form>
